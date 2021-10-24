@@ -15,9 +15,6 @@
     <body>
         {% block body %}
         {% endblock %}
-        <footer class="border shadow p-2 mt-5 bg-body rounded">
-            <p class="text-center mt-3">&copy; Copyright {{ 'now'|date('Y') }} &middot; <a href="{{ path('about') }}">About US</a></p>
-        </footer>
         {% block javascripts %}
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
