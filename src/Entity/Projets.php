@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProjetsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ProjetsRepository::class)
@@ -20,11 +21,15 @@ class Projets
 
     /**
      * @ORM\Column(type="string", length=80)
+     * @Assert\NotBlank
+     * @Assert\Length(min=3)
      */
     private $Titre;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
+     * @Assert\Length(min=10)
      */
     private $Description;
 
@@ -35,6 +40,7 @@ class Projets
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Positive
      */
     private $Progress;
 

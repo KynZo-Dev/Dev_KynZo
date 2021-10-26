@@ -55,7 +55,7 @@
     </nav>
     <main>
         <div class="row">
-            <div class="col-md-6 mx-auto border shadow bg-body rounded">
+            <div class="col-md-4 mx-auto border shadow bg-body rounded">
                 <h1 class="text-center">Création de compte</h1>
                 {{ form_start(registrationForm) }}
                     {{ form_row(registrationForm.email) }}
@@ -74,7 +74,7 @@
         </div>
     </main>
     <footer class="border mt-5 shadow p-3 mb-5 bg-body rounded d-flex justify-content-center align-items-center">
-        <div class="">&copy; Copyright {{ 'now'|date('Y') }} &middot; <a href="{{ path('about') }}">About US</a></div>
+        <div class="text-muted">&copy; Copyright {{ 'now'|date('Y') }} &middot; <a href="{{ path('about') }}">About US</a></div>
     </footer>
 {% endblock %}
 
