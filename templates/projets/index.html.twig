@@ -69,6 +69,13 @@
         </div>
     </nav>
     <main>
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type }}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
         <h2 class="text-center">Projets index</h2>
         <div class="table-responsive ms-3 me-3">
             <table class="table align-middle table-striped table-hover">
