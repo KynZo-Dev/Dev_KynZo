@@ -35,13 +35,14 @@ class Projets
     private $Description;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $ImgProjet;
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\Positive
+     * @Assert\PositiveOrZero
+     * @Assert\Range(min = 0, max = 100)
      */
     private $Progress;
 
