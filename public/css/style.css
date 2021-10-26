@@ -1,0 +1,19 @@
+.header {
+    display: table;
+    height: 10em;
+    width: 100%;
+    background-image: url("../img/code-pourron.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.h1 {
+    color: white;
+    text-align: left;
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 100%;
+    padding-left: 2em;
+}
+nav {
+    box-shadow: 0px 10px 10px grey;
+}
