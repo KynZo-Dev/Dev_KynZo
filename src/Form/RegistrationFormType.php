@@ -11,6 +11,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -18,6 +20,17 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email')
+            ->add('LastName', TextType::class, [
+                'label' => 'Nom'
+            ])
+            ->add('FirstName', TextType::class, [
+                'label' => 'Prénoms'
+            ])
+            ->add('Birthdays', DateType::class, [
+                'label' => 'Anniverssaire',
+                'widget' => 'single_text',
+                'attr' => ['class' => 'datepicker']
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [

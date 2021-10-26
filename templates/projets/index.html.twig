@@ -10,7 +10,7 @@
     <header class="header">
         <h1 class="h1">Développeur KynZo</h1>
     </header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -25,15 +25,42 @@
                             Accueil
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ path('projets_index') }}">Projets</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Profil</a>
-                    </li>
+                    {% if is_granted('ROLE_USER') %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Projets
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ path('projets_index') }}">Projets</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ path('projets_new') }}">Nouveaux projet</a></li>
+                            </ul>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('projets_index') }}">Projets</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Contact</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                    {% if is_granted('ROLE_USER') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_register') }}">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_login') }}">login</a>
+                        </li>
+                    {% endif %}
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
@@ -42,13 +69,6 @@
         </div>
     </nav>
     <main>
-        {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                <div role="alert" class="flash-{{ label }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
         <h2>Projets index</h2>
         <div class="table-responsive ms-3 me-3">
             <table class="table align-middle table-striped table-hover">
@@ -82,10 +102,9 @@
                 {% endfor %}
                 </tbody>
             </table>
-            <a href="{{ path('projets_new') }}">Create new</a>
         </div>
     </main>
-    <footer class="border mt-4">
-        <p class="text-center mt-4">&copy; Copyright {{ 'now'|date('Y') }} &middot; <a href="{{ path('about') }}">About US</a></p>
+    <footer class="border mt-5 shadow p-3 mb-5 bg-body rounded d-flex justify-content-center align-items-center">
+        <div class="">&copy; Copyright {{ 'now'|date('Y') }} &middot; <a href="{{ path('about') }}">About US</a></div>
     </footer>
 {% endblock %}
