@@ -5,8 +5,8 @@ namespace App\Form;
 use App\Entity\Projets;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProjetsType extends AbstractType
 {
@@ -16,8 +16,8 @@ class ProjetsType extends AbstractType
             ->add('Titre')
             ->add('Description')
             ->add('ImgProjet', FileType::class, [
-                'required' => false,
-                
+                'mapped' => false,
+                'required' => false
             ])
             ->add('Progress')
         ;

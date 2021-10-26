@@ -93,8 +93,6 @@
             <table class="table align-middle table-striped table-hover">
                 <thead class="table table-dark">
                     <tr>
-                        <th>Projet N°</th>
-                        <th>ImgProjet</th>
                         <th>Titre</th>
                         <th>Description</th>
                         <th>Progression</th>
@@ -104,8 +102,6 @@
                 <tbody>
                 {% for projet in projets %}
                     <tr>
-                        <td>{{ projet.id }}</td>
-                        <td>{{ projet.ImgProjet }}</td>
                         <td>{{ projet.Titre }}</td>
                         <td>{{ projet.Description|u.truncate(50,'...', false) }}</td>
                         <td>{{ projet.Progress }} %</td>

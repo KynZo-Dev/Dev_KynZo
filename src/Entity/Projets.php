@@ -6,12 +6,10 @@ use App\Repository\ProjetsRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ProjetsRepository::class)
  * @ORM\HasLifecycleCallbacks()
- * @Vich\Uploadable
  */
 class Projets
 {
@@ -35,15 +33,6 @@ class Projets
      * @Assert\Length(min=10)
      */
     private $Description;
-
-    /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     * 
-     * @Vich\UploadableField(mapping="image_projet", fileNameProperty="ImgProjet")
-     * 
-     * @var File|null
-     */
-    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -93,23 +82,6 @@ class Projets
         $this->Description = $Description;
 
         return $this;
-    }
-
-    /**
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
-     */
-    public function setImageFile(?File $imageFile = null): void
-    {
-        $this->imageFile = $imageFile;
-
-        if (null !== $imageFile) {
-            $this->setUpdatedAt(new \DateTimeImmutable);
-        }
-    }
-
-    public function getImageFile(): ?File
-    {
-        return $this->imageFile;
     }
 
     public function getImgProjet(): ?string
