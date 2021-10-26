@@ -15,7 +15,10 @@ class ProjetsType extends AbstractType
         $builder
             ->add('Titre')
             ->add('Description')
-            ->add('ImgProjet')
+            ->add('ImgProjet', FileType::class, [
+                'required' => false,
+                
+            ])
             ->add('Progress')
         ;
     }
