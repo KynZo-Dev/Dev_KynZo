@@ -31,9 +31,22 @@ class ProjetsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // on récupere les img uploads
+            $images = $form->get('ImgProjet')->getData();
+            // on gere le nom de l'img
+            $fichier = md5(uniqid()) . '.' . $images->guessExtension();
+            // on copie le fichier dans le dossier
+            $images->move(
+                $this->getParameter('images_directory'),
+                $fichier
+            );
+            // stocke le name de l'img dans la BDD
+            $projet->setImgProjet($fichier);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($projet);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Projet créé avec succès');
 
             return $this->redirectToRoute('projets_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -61,7 +74,22 @@ class ProjetsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // on récupere les img uploads
+            $images = $form->get('ImgProjet')->getData();
+            // on gere le nom de l'img
+            $fichier = md5(uniqid()) . '.' . $images->guessExtension();
+            // on copie le fichier dans le dossier
+            $images->move(
+                $this->getParameter('images_directory'),
+                $fichier
+            );
+            $nom = $projet->getImgProjet();
+            unlink($this->getParameter('images_directory').'/'.$nom);
+            // stocke le name de l'img dans la BDD
+            $projet->setImgProjet($fichier);
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Projet modifié avec succès');
 
             return $this->redirectToRoute('projets_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -78,10 +106,13 @@ class ProjetsController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
         
         if ($this->isCsrfTokenValid('delete'.$projet->getId(), $request->request->get('_token'))) {
+            $nom = $projet->getImgProjet();
+            unlink($this->getParameter('images_directory').'/'.$nom);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($projet);
             $entityManager->flush();
-
+            
+            $this->addFlash('info', 'Projet supprimé avec succès');
         }
 
         return $this->redirectToRoute('projets_index', [], Response::HTTP_SEE_OTHER);

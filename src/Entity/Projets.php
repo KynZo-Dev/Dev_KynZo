@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ProjetsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass=ProjetsRepository::class)
@@ -20,21 +22,27 @@ class Projets
 
     /**
      * @ORM\Column(type="string", length=80)
+     * @Assert\NotBlank
+     * @Assert\Length(min=3)
      */
     private $Titre;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank
+     * @Assert\Length(min=10)
      */
     private $Description;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $ImgProjet;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\PositiveOrZero
+     * @Assert\Range(min = 0, max = 100)
      */
     private $Progress;
 
