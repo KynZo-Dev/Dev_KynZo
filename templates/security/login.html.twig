@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Dev KynZo - Log in!{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/style.css') }}">
@@ -58,7 +58,7 @@
                 <h1 class="mt-5 mb-3 text-center">Connexion</h1>
                 <form method="post">
                     {% if error %}
-                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}
                     {% if app.user %}
                         <div class="mb-3">
@@ -66,16 +66,23 @@
                         </div>
                     {% endif %}
                     <h2 class="h4 mb-3 font-weight-normal">Veuillez entrer vos identifiants</h2>
-                    <label for="inputEmail">Email</label>
-                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-                    <label for="inputPassword">Password</label>
-                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <div class="form-group">
+                        <label for="inputEmail">Email</label>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                    </div>
+                    <div class="d-flex justify-content-between">
                         <div class="checkbox mb-3">
                             <label>
                                 <input type="checkbox" name="_remember_me"> Se souvenir de moi
                             </label>
                         </div>
+                        {#<a href="#">Perdu le Mot de passe?</a>#}
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     <div class="d-grid gap-2 col-6 mx-auto mb-3">
                         <button class="btn btn-lg btn-outline-primary" type="submit">Se connecter</button>
                     </div>
