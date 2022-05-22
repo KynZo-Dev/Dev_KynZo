@@ -25,7 +25,7 @@ class ProjetsType extends AbstractType
             ->add('ImgProjet', FileType::class, [
                 'label' => 'Image du projet',
                 'mapped' => false,
-                'required' => true
+                'required' => false
             ])
             ->add('Progress', NumberType::class, [
                 'label' => 'Progression du projet'
